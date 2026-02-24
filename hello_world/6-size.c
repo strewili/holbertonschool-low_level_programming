@@ -6,8 +6,7 @@
 #include <stdio.h>
 
 /**
- * main - Prints "with proper grammar, but the outcome is
- *                a piece of art," folowed be any line you like go for it
+ * main - Prints the pervious size and try to figure if its write or somthing also its good
  *
  * Return: Always 0.
  */
