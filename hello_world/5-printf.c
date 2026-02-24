@@ -6,8 +6,8 @@
 #include <stdio.h>
 
 /**
- * main - Print "with proper grammar, but the outcome is
- *                a piece of art," 
+ * main - Prints "with proper grammar, but the outcome is
+ *                a piece of art," folowed be any line you like go for it
  *
  * Return: Always 0.
  */
