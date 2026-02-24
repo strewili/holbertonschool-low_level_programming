@@ -6,7 +6,7 @@
 #include <stdio.h>
 
 /**
- * main - Prints the pervious size and try to figure if its write or somthing also its good
+ * main - Prints the  size of various types
  *
  * Return: Always 0.
  */
