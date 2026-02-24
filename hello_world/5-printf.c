@@ -1,6 +1,7 @@
 /*
-   strewixi 
-    programing *\
+ *  strewixi 
+ *  programing
+ *\
 #include <stdio.h>
 
 int main(void)
