@@ -7,26 +7,17 @@
  */
 int main(void)
 {
-	int i;
-	int j;
+	int n;
 
-	i = 0;
-	while (i <= 8)
+	for (n = 0; n <= 9; n++)
 	{
-		j = i + 1;
-		while (j <= 9)
-		{
-			putchar(i + '0');
-			putchar(j + '0');
+		putchar(n + '0');
 
-			if (!(i == 8 && j == 9))
-			{
-				putchar(',');
-				putchar(' ');
-			}
-			j++;
+		if (n != 9)
+		{
+			putchar(',');
+			putchar(' ');
 		}
-		i++;
 	}
 
 	putchar('\n');
