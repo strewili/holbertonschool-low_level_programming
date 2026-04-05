@@ -4,15 +4,15 @@
 #include <stdarg.h>
 
 /**
- * struct print - struct print
- * @symbol: symbol representing the type
+ * struct token - structure for print_all
+ * @token: type specifier
  * @f: function pointer
  */
-typedef struct print
+typedef struct token
 {
-	char *symbol;
-	void (*f)(va_list list);
-} print_t;
+	char *token;
+	void (*f)(va_list);
+} token_t;
 
 int sum_them_all(const unsigned int n, ...);
 void print_numbers(const char *separator, const unsigned int n, ...);
