@@ -1,81 +1,39 @@
 #include "main.h"
 
 /**
- * close_file - closes a file descriptor
- * @fd: file descriptor to close
- */
-void close_file(int fd)
-{
-	int c;
-
-	c = close(fd);
-
-	if (c == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't close fd %d\n", fd);
-		exit(100);
-	}
-}
-
-/**
- * main - copies the content of one file to another
- * @argc: argument count
- * @argv: argument vector
+ * append_text_to_file - appends text at the end of a file
+ * @filename: name of the file
+ * @text_content: string to append
  *
- * Return: 0 on success
+ * Return: 1 on success, -1 on failure
  */
-int main(int argc, char *argv[])
+int append_text_to_file(const char *filename, char *text_content)
 {
-	int file_from, file_to;
-	ssize_t r, w;
-	char buffer[1024];
+	int fd;
+	int len = 0;
+	ssize_t w;
 
-	if (argc != 3)
-	{
-		dprintf(STDERR_FILENO, "Usage: cp file_from file_to\n");
-		exit(97);
-	}
+	if (filename == NULL)
+		return (-1);
 
-	file_from = open(argv[1], O_RDONLY);
-	if (file_from == -1)
-	{
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
+	fd = open(filename, O_WRONLY | O_APPEND);
+	if (fd == -1)
+		return (-1);
 
-	file_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 0664);
-	if (file_to == -1)
+	if (text_content != NULL)
 	{
-		close_file(file_from);
-		dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-		exit(99);
-	}
+		while (text_content[len] != '\0')
+			len++;
 
-	r = read(file_from, buffer, 1024);
-	while (r > 0)
-	{
-		w = write(file_to, buffer, r);
-		if (w == -1 || w != r)
+		w = write(fd, text_content, len);
+		if (w == -1 || w != len)
 		{
-			close_file(file_from);
-			close_file(file_to);
-			dprintf(STDERR_FILENO, "Error: Can't write to %s\n", argv[2]);
-			exit(99);
+			close(fd);
+			return (-1);
 		}
-
-		r = read(file_from, buffer, 1024);
 	}
 
-	if (r == -1)
-	{
-		close_file(file_from);
-		close_file(file_to);
-		dprintf(STDERR_FILENO, "Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
+	close(fd);
 
-	close_file(file_from);
-	close_file(file_to);
-
-	return (0);
+	return (1);
 }
